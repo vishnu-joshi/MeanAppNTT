@@ -1,0 +1,19 @@
+
+<h1 align = "center">Enter a word to add it to MongoDB</h1>
+<div class="row">
+    <div class="col-sm-5"></div>
+    <div class="col-sm-7">
+        <div class = "row">
+            <form #form = "ngForm" (ngSubmit)="logMessage(form.value)" class = "well">
+                <div class = "form-group">
+                    <input type = "text" id = "inputtext" class = "form-control" name = "input" ngModel required>
+                </div>
+                <button type = "submit" class = "btn btn-success">Add to Database!</button>
+            </form>
+        </div>
+
+        
+        <entry-list [inputs]="usinputs"></entry-list>
+    </div>
+    
+</div>
