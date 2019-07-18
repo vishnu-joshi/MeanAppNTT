@@ -13,7 +13,9 @@ import { AboutComponent } from './about/about.component';
 import { HelpComponent } from './help/help.component';
 import { UploadComponent } from './upload/upload.component';
 import { CompareComponent } from './compare/compare.component';
-import { DownloadComponent } from './download/download.component'
+import { DownloadComponent } from './download/download.component';
+import { NewcityreqComponent } from './newcityreq/newcityreq.component';
+import { NewfeaturereqComponent } from './newfeaturereq/newfeaturereq.component'
 
 @NgModule({
   declarations: [
@@ -27,6 +29,8 @@ import { DownloadComponent } from './download/download.component'
     UploadComponent,
     CompareComponent,
     DownloadComponent,
+    NewcityreqComponent,
+    NewfeaturereqComponent,
     
   ],
   imports: [
