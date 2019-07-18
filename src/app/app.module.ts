@@ -11,7 +11,9 @@ import { MenuComponent } from './menu/menu.component';
 import { CitylistComponent } from './citylist/citylist.component';
 import { AboutComponent } from './about/about.component';
 import { HelpComponent } from './help/help.component';
-import { UploadComponent } from './upload/upload.component'
+import { UploadComponent } from './upload/upload.component';
+import { CompareComponent } from './compare/compare.component';
+import { DownloadComponent } from './download/download.component'
 
 @NgModule({
   declarations: [
@@ -23,6 +25,8 @@ import { UploadComponent } from './upload/upload.component'
     AboutComponent,
     HelpComponent,
     UploadComponent,
+    CompareComponent,
+    DownloadComponent,
     
   ],
   imports: [

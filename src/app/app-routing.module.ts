@@ -7,6 +7,8 @@ import { CitylistComponent } from './citylist/citylist.component';
 import { AboutComponent } from './about/about.component';
 import { HelpComponent } from './help/help.component';
 import { UploadComponent } from './upload/upload.component';
+import { CompareComponent } from './compare/compare.component';
+import { DownloadComponent } from './download/download.component';
 const routes: Routes = [
     {path: '', redirectTo: '/home', pathMatch: 'full'},
     {path: 'home', component: HomeComponent},
@@ -24,7 +26,13 @@ const routes: Routes = [
     {path: 'help/menu', redirectTo: '/menu', pathMatch: 'full'},
     {path: 'upload', component: UploadComponent},
     {path: 'menu/upload', redirectTo: '/upload', pathMatch: 'full'},
-    {path: 'upload/menu', redirectTo: '/menu', pathMatch: 'full'}
+    {path: 'upload/menu', redirectTo: '/menu', pathMatch: 'full'},
+    {path: 'compare', component: CompareComponent},
+    {path: 'menu/compare', redirectTo: '/compare', pathMatch: 'full'},
+    {path: 'compare/menu', redirectTo: '/menu', pathMatch: 'full'},
+    {path: 'download', component: DownloadComponent},
+    {path: 'menu/download', redirectTo: '/download', pathMatch: 'full'},
+    {path: 'download/menu', redirectTo: '/menu', pathMatch: 'full'}
 ];
 
 
