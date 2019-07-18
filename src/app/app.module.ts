@@ -7,7 +7,9 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { EntryListComponent } from './entry-list/entry-list.component';
 import { AgmCoreModule } from '@agm/core';
-import { MenuComponent } from './menu/menu.component'
+import { MenuComponent } from './menu/menu.component';
+import { CitylistComponent } from './citylist/citylist.component';
+import { AboutComponent } from './about/about.component'
 
 @NgModule({
   declarations: [
@@ -15,6 +17,8 @@ import { MenuComponent } from './menu/menu.component'
     HomeComponent,
     EntryListComponent,
     MenuComponent,
+    CitylistComponent,
+    AboutComponent,
     
   ],
   imports: [
