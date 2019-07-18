@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { map } from 'rxjs/operators';
 import { UserEntry } from './user-entry';
+import { Location } from './Location';
 
 @Injectable({
   providedIn: 'root'

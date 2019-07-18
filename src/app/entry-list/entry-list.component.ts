@@ -5,7 +5,7 @@ import { UserEntry } from '../user-entry';
   selector: 'entry-list',
   templateUrl: './entry-list.component.html',
   styleUrls: ['./entry-list.component.css'],
-  inputs: ['inputs']
+  inputs: ['crimelocations']
 })
 export class EntryListComponent implements OnInit {
   

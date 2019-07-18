@@ -35,5 +35,10 @@
     </form>    
 </div>
 <div class="row">
-    <entry-list [inputs]="usinputs"></entry-list>
+    <agm-map [latitude] = "latitude" [longitude] = "longitude">
+        <li *ngFor = "let Location of crimelocations"><a>
+            <agm-marker [latitude] = Location.latitude [longitude] = Location.longitude></agm-marker>
+            </a></li>
+    </agm-map>
+    <entry-list [crimelocations]="crimelocations"></entry-list>
 </div>

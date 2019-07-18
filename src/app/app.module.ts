@@ -6,6 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { EntryListComponent } from './entry-list/entry-list.component';
+import { AgmCoreModule } from '@agm/core'
 
 @NgModule({
   declarations: [
@@ -18,7 +19,10 @@ import { EntryListComponent } from './entry-list/entry-list.component';
     BrowserModule,
     AppRoutingModule,
     HttpModule,
-    FormsModule
+    FormsModule,
+    AgmCoreModule.forRoot({
+      apiKey: "AIzaSyAP-MeUAQ9HwKvdFG-09XmwLu-ySDBl_tg"
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]
