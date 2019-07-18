@@ -5,7 +5,7 @@ import { UserentryService } from './../userentry.service'
 import { AgmCoreModule } from '@agm/core'
 
 @Component({
-  selector: 'app-home',
+  selector: 'home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
   providers: [UserentryService]
