@@ -13,7 +13,7 @@ import { AgmCoreModule } from '@agm/core'
 export class HomeComponent implements OnInit {
 
   usinputs: Array<UserEntry>;
-  crimelocations: Array<Location>
+  crimelocations: Array<Location>;
   latitude = 33.9806;
   longitude = -117.3755;
   constructor(private _userEntryService: UserentryService) { }

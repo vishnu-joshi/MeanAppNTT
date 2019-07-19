@@ -3,7 +3,8 @@
     <div class="row">
         <div class="col-md-2"></div>
         <div class="col-md-10">
-                Enter a city whose data you would like to see, to see all the cities we have, click here.
+                Enter a city whose data you would like to see, to see all the cities we have, click 
+                <a href="/citylist">here</a>.
         </div>
     </div>
 </div>
@@ -24,10 +25,15 @@
     </form>    
 </div>
 <div class="row">
-    <agm-map [latitude] = "latitude" [longitude] = "longitude">
-        <li *ngFor = "let Location of crimelocations"><a>
-            <agm-marker [latitude] = Location.latitude [longitude] = Location.longitude></agm-marker>
-            </a></li>
-    </agm-map>
+    <div class="col-md-4">    
+
+    </div>
+    <div class="col-md-8">
+            <agm-map [latitude] = "latitude" [longitude] = "longitude">
+                    <li *ngFor = "let Location of crimelocations"><a>
+                        <agm-marker [latitude] = Location.latitude [longitude] = Location.longitude></agm-marker>
+                        </a></li>
+                </agm-map>
+    </div>  
     <entry-list [crimelocations]="crimelocations"></entry-list>
 </div>
