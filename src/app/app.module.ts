@@ -15,7 +15,8 @@ import { UploadComponent } from './upload/upload.component';
 import { CompareComponent } from './compare/compare.component';
 import { DownloadComponent } from './download/download.component';
 import { NewcityreqComponent } from './newcityreq/newcityreq.component';
-import { NewfeaturereqComponent } from './newfeaturereq/newfeaturereq.component'
+import { NewfeaturereqComponent } from './newfeaturereq/newfeaturereq.component';
+import { FileSelectDirective } from 'ng2-file-upload';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { NewfeaturereqComponent } from './newfeaturereq/newfeaturereq.component'
     DownloadComponent,
     NewcityreqComponent,
     NewfeaturereqComponent,
-    
+    FileSelectDirective,
+
   ],
   imports: [
     BrowserModule,
