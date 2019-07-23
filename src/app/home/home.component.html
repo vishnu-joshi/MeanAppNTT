@@ -8,22 +8,34 @@
         </div>
     </div>
 </div>
+
 <div class="container">
-    <form #form="ngForm" (ngSubmit)="logMessage(form.value)" class = "row well" >
-        <div class="col-md-4">  
-        </div>
+    <form #cityname="ngForm" (ngSubmit)="logMessage(inputtext.value)" class = "row well" >
+        <div class="col-md-4"></div>
         <div class="col-md-3">
-            <div class="form-group">
-                <input type="text" id="inputtext" class="form-control" name="input" ngModel required>
+            <div class="form-group" >
+                <input type="text" 
+                    [class.is-invalid]="(inputtext.invalid && inputtext.touched) || !validcity" 
+                    id="inputtext" 
+                    class="form-control" 
+                    name="cityInput" 
+                    #inputtext = "ngModel" 
+                    required 
+                    [(ngModel)] = "cityattempt.citynameentry">
+                <!----small class = "text-danger" [class.d-none] = "(inputtext.valid || inputtext.untouched) && validcity">Invalid city - city may not be supported yet.</small>-->
+                <div *ngIf="!validcity || (inputtext.invalid && inputtext.touched)">
+                    <small class = "text-danger" *ngIf="inputtext.invalid && inputtext.touched">Must enter a city name</small>
+                    <small class = "text-danger" *ngIf="!validcity && inputtext.valid">This city is not yet supported</small>
+                </div>
             </div>
         </div>
         <div class="col-md-3">
-            <button type="submit" class="btn btn-success">Search</button>
+            <button type="submit" class="btn btn-success" [disabled] = "inputtext.invalid">Search</button>
         </div>
-        <div class="col-md-2">
-        </div>
+        <div class="col-md-2"></div>
     </form>    
 </div>
+<hr />
 <div class="row">
     <div class="col-md-4">    
 
