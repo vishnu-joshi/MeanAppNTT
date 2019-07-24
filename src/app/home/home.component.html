@@ -1,11 +1,12 @@
 
 <div class="container">
-    <div class="row">
-        <div class="col-md-2"></div>
-        <div class="col-md-10">
-                Enter a city whose data you would like to see, to see all the cities we have, click 
+    <div class="row justify-content-center">
+        
+                <h5 class = "text-center">
+                    Enter a city whose data you would like to see, to see all the cities we have, click 
                 <a href="/citylist">here</a>.
-        </div>
+                </h5>
+        
     </div>
 </div>
 
@@ -36,16 +37,13 @@
     </form>    
 </div>
 <hr />
-<div class="row">
-    <div class="col-md-4">    
-
-    </div>
-    <div class="col-md-8">
+<div class="row justify-content-center">
+    
             <agm-map [latitude] = "latitude" [longitude] = "longitude">
                     <li *ngFor = "let Location of crimelocations"><a>
                         <agm-marker [latitude] = Location.latitude [longitude] = Location.longitude></agm-marker>
                         </a></li>
                 </agm-map>
-    </div>  
+     
     <entry-list [crimelocations]="crimelocations"></entry-list>
 </div>
