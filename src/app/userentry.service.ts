@@ -1,8 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { map } from 'rxjs/operators';
+import 'rxjs/add/operator/toPromise'
 import { UserEntry } from './user-entry';
 import { Location } from './Location';
+import { Observable } from 'rxjs';
+import { ValidCity } from './ValidCity'
 
 @Injectable({
   providedIn: 'root'
@@ -11,10 +14,16 @@ export class UserentryService {
 
   private _getUrl = "/api/userinputs";
   private _postUrl = "/api/userinput";
+  private _getCityUrl = "/api/supportedcities"
   constructor(private _http: Http) { }
 
-  getInputs() {
+  getInputs():Observable<Location[]> {
       return this._http.get(this._getUrl)
+        .pipe(map((response: Response) => response.json()));
+  }
+
+  getCities():Observable<ValidCity[]> {
+      return this._http.get(this._getCityUrl)
         .pipe(map((response: Response) => response.json()));
   }
 

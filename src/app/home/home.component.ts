@@ -6,6 +6,10 @@ import { cityCrimeObject } from './CityCrimeObject'
 import { AbstractControl, Validators } from '@angular/forms';
 import { AgmCoreModule } from '@agm/core'
 import { cityEntry } from './cityEntry';
+import { ValidCity } from '../ValidCity';
+import { LoadChildren } from '@angular/router';
+import 'rxjs/add/operator/map'
+import 'rxjs/add/operator/catch'
 
 
 @Component({
@@ -21,11 +25,14 @@ export class HomeComponent implements OnInit {
 
   usinputs: Array<UserEntry>;
   crimelocations: Array<Location>;
-  latitude = 33.9806;
-  longitude = -117.3755;
+  tempcrimes: Array<Location>;
+  allvalidcities: Array<ValidCity>;
+  latitude = 38.9339;
+  longitude = -77.1773;
   mymap = new Map<string, cityCrimeObject>();
   cityattempt = new cityEntry("");
   validcity = true;
+  firstload = true;
   
   
 
@@ -34,25 +41,35 @@ export class HomeComponent implements OnInit {
   
   ngOnInit() {
       
+      this._userEntryService.getCities()
+        .subscribe(resInputData => {
+          this.allvalidcities = resInputData
+          this.allvalidcities.forEach(element => {
+            console.log(element.cityname)
+            this.mymap.set(element.cityname, new cityCrimeObject(element.centerlat, element.centerlong))
+          });
+          
+        })
+      
+      
+      /*
       this._userEntryService.getInputs()
         .subscribe(resInputData => this.crimelocations = resInputData);
-      console.log("this occurred");
-      this.mymap.set("Riverside, CA", new cityCrimeObject(33.9806, -117.3755, this.crimelocations));
+        */
   };
 
   logMessage(input: string) {
-    /*
-    console.log("Hello");
-    this._userEntryService.addInput(input)
-      .subscribe(resNewInput => {
-        this.usinputs.push(input);
     
-    });
-    */
     if (this.mymap.has(input)) {
       this.validcity = true
+      this._userEntryService.getInputs()
+      .subscribe(resInputData =>  {
+        this.crimelocations = resInputData;
+        this.latitude = Number(this.mymap.get(input).centerlatitude)
+        this.longitude = Number(this.mymap.get(input).centerlongitude)
+      })
     } else {
-      this.validcity = false
+      this.validcity = false;
     }
   }
 

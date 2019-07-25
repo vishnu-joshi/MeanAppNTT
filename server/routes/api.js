@@ -3,6 +3,7 @@ const router = express.Router();
 const mongoose = require('mongoose');
 const Input = require('../models/userentry')
 const Loca = require('../models/loc')
+const SuppCity = require('../models/SupportedCity')
 
 //const db = "mongodb://videouser:please123@cluster0-shard-00-00-5ftnw.mongodb.net:27017,cluster0-shard-00-01-5ftnw.mongodb.net:27017,cluster0-shard-00-02-5ftnw.mongodb.net:27017/userinputdata?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true&w=majority";
 const db = "mongodb://ntt-test-user:internproject@cluster0-shard-00-00-5ftnw.mongodb.net:27017,cluster0-shard-00-01-5ftnw.mongodb.net:27017,cluster0-shard-00-02-5ftnw.mongodb.net:27017/Crime?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true&w=majority";
@@ -25,6 +26,23 @@ router.get('/userinputs', function(req, res) {
 
     console.log('Get request for all crime data');
     Loca.find({})
+    .exec(function(err, inputs) {
+        if (err) {
+            console.log("Error retrieving user input " + err);
+        } else {
+            //console.log(userinputs);
+            console.log('Tried to load into JSON');
+            res.json(inputs)
+        }
+    });
+
+    //res.send('api works');
+});
+
+router.get('/supportedcities', function(req, res) {
+
+    console.log('Get request for all supportedcities');
+    SuppCity.find({})
     .exec(function(err, inputs) {
         if (err) {
             console.log("Error retrieving user input " + err);
