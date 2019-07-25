@@ -39,6 +39,23 @@ router.get('/userinputs', function(req, res) {
     //res.send('api works');
 });
 
+router.get('/userinputs/:city', function(req, res) {
+
+    console.log('Get request for all crime data hahaha');
+    Loca.find({city: req.params.city})
+    .exec(function(err, inputs) {
+        if (err) {
+            console.log("Error retrieving user input " + err);
+        } else {
+            //console.log(userinputs);
+            console.log('Tried to load into JSON');
+            res.json(inputs)
+        }
+    });
+
+    //res.send('api works');
+});
+
 router.get('/supportedcities', function(req, res) {
 
     console.log('Get request for all supportedcities');
