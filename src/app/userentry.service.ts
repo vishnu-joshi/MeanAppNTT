@@ -17,8 +17,8 @@ export class UserentryService {
   private _getCityUrl = "/api/supportedcities"
   constructor(private _http: Http) { }
 
-  getInputs():Observable<Location[]> {
-      return this._http.get(this._getUrl)
+  getInputs(input: String):Observable<Location[]> {
+      return this._http.get(this._getUrl + "/" + input)
         .pipe(map((response: Response) => response.json()));
   }
 
