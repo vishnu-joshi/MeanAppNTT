@@ -38,12 +38,10 @@
 </div>
 <hr />
 <div class="row justify-content-center">
-    
-            <agm-map [latitude] = "latitude" [longitude] = "longitude">
-                    <li *ngFor = "let Location of crimelocations"><a>
-                        <agm-marker [latitude] = Location.latitude [longitude] = Location.longitude></agm-marker>
-                        </a></li>
-                </agm-map>
-     
+    <agm-map [latitude] = "latitude" [longitude] = "longitude">
+            <li *ngFor = "let Location of crimelocations"><a>
+                <agm-marker [latitude] = Location.latitude [longitude] = Location.longitude></agm-marker>
+                </a></li>
+    </agm-map>
     <entry-list [crimelocations]="crimelocations"></entry-list>
 </div>

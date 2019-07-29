@@ -26,36 +26,24 @@ export class HomeComponent implements OnInit {
   usinputs: Array<UserEntry>;
   crimelocations: Array<Location>;
   tempcrimes: Array<Location>;
-  allvalidcities: Array<ValidCity>;
-  latitude = 38.9339;
+  public allvalidcities: Array<ValidCity>;
+  public latitude = 38.9339;
   longitude = -77.1773;
-  mymap = new Map<string, cityCrimeObject>();
-  cityattempt = new cityEntry("");
+  public mymap = new Map<string, cityCrimeObject>();
   validcity = true;
-  firstload = true;
-  
-  
+  cityattempt = new cityEntry("");
 
   constructor(private _userEntryService: UserentryService) { }
- 
   
   ngOnInit() {
-      
-      this._userEntryService.getCities()
-        .subscribe(resInputData => {
-          this.allvalidcities = resInputData
-          this.allvalidcities.forEach(element => {
-            console.log(element.cityname)
-            this.mymap.set(element.cityname, new cityCrimeObject(element.centerlat, element.centerlong, []))
-          });
-          
-        })
-      
-      
-      /*
-      this._userEntryService.getInputs()
-        .subscribe(resInputData => this.crimelocations = resInputData);
-        */
+    this._userEntryService.getCities()
+      .subscribe(resInputData => {
+        this.allvalidcities = resInputData
+        this.allvalidcities.forEach(element => {
+          console.log(element.cityname)
+          this.mymap.set(element.cityname, new cityCrimeObject(element.centerlat, element.centerlong, 0, 0, []))
+        });        
+      })
   };
 
   logMessage(input: string) {
@@ -77,9 +65,6 @@ export class HomeComponent implements OnInit {
         this.longitude = Number(this.mymap.get(input).centerlongitude)
         console.log("Already seen")
       }
-
-
-
     } else {
       this.validcity = false;
     }

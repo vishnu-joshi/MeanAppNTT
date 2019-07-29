@@ -1,1 +1,71 @@
-<p>compare works!</p>
+<div class="row">
+    <div class="col-sm-6 text-center">
+        <h1>City 1</h1>
+        <form #cityname1="ngForm" (ngSubmit)="checkCity(inputtext1.value)" class = "row well" >
+            <div class="form-group" >
+                <input type="text" 
+                    [class.is-invalid]="(inputtext1.invalid && inputtext1.touched) || !validcity1" 
+                    id="inputtext1" 
+                    class="form-control" 
+                    name="cityInput1" 
+                    #inputtext1 = "ngModel" 
+                    required 
+                    [(ngModel)] = "cityattempt1.citynameentry">
+                <!----small class = "text-danger" [class.d-none] = "(inputtext.valid || inputtext.untouched) && validcity">Invalid city - city may not be supported yet.</small>-->
+                <div *ngIf="!validcity1 || (inputtext1.invalid && inputtext1.touched)">
+                    <small class = "text-danger" *ngIf="inputtext1.invalid && inputtext1.touched">Must enter a city name</small>
+                    <small class = "text-danger" *ngIf="!validcity1 && inputtext1.valid">This city is not yet supported</small>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <button type="submit" class="btn btn-success" [disabled] = "inputtext1.invalid">Search</button>
+            </div>
+        </form>
+        <div class = "row justify-content-center">
+            <agm-map id = "map1" [latitude] = "lat1" [longitude] = "long1">
+                    <li *ngFor = "let Location of crimelocations1"><a>
+                            <agm-marker [latitude] = Location.latitude [longitude] = Location.longitude></agm-marker>
+                    </a></li>
+            </agm-map>
+        </div>
+        
+    </div>
+    
+    <div class="col-sm-6 center-block text-center">
+        <h1>City 2</h1>
+        <form #cityname2="ngForm" (ngSubmit)="checkCity2(inputtext2.value)" class = "row well" >
+            <div class="form-group" >
+                <input type="text" 
+                    [class.is-invalid]="(inputtext2.invalid && inputtext2.touched) || !validcity2" 
+                    id="inputtext2" 
+                    class="form-control" 
+                    name="cityInput2" 
+                    #inputtext2 = "ngModel" 
+                    required 
+                    [(ngModel)] = "cityattempt2.citynameentry">
+                <!----small class = "text-danger" [class.d-none] = "(inputtext.valid || inputtext.untouched) && validcity">Invalid city - city may not be supported yet.</small>-->
+                <div *ngIf="!validcity2 || (inputtext2.invalid && inputtext2.touched)">
+                    <small class = "text-danger" *ngIf="inputtext2.invalid && inputtext2.touched">Must enter a city name</small>
+                    <small class = "text-danger" *ngIf="!validcity2 && inputtext2.valid">This city is not yet supported</small>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <button type="submit" class="btn btn-success" [disabled] = "inputtext2.invalid">Search</button>
+            </div>
+        </form>
+        <div class = "row justify-content-center">
+            <agm-map id = "map2" [latitude] = "lat2" [longitude] = "long2">
+                    <li *ngFor = "let Location of crimelocations2"><a>
+                            <agm-marker [latitude] = Location.latitude [longitude] = Location.longitude></agm-marker>
+                    </a></li>
+            </agm-map>
+        </div>
+        
+    </div>
+</div>
+<hr />
+<div>
+    <canvas id="pieChart1" width="1000" height = "400"></canvas>
+</div>
+
+
