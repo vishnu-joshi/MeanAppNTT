@@ -3,11 +3,20 @@
         <h4>Upload a file.</h4>
     </div>
     <div class="row">
-        <input type="file" name="csv" ng2FileSelect [uploader]="uploader"/>
-        <button type="btn btn-success btn-s"
-            (click) = "uploader.uploadAll()"
-            [disabled] = "!uploader.getNotUploadedItems().length">
-            Upload
-        </button>
+        <div class="col-md-6">
+            <input type="file" name="csv" ng2FileSelect [uploader]="uploader"/>
+            <button type="btn btn-success btn-s"
+                (click) = "uploader.uploadAll()"
+                [disabled] = "!uploader.getNotUploadedItems().length">
+                Upload
+            </button>
+        </div>
+        <div class="col-md-2">
+            <div class="progress">
+                <div class="progress-bar bg-success"
+                [ngStyle]="{'width':uploader.progress+'%'}"></div>
+            </div>
+        </div> 
+        <div class="col-md-4"></div>
     </div>
 </div>
