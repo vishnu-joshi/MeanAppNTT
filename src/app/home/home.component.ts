@@ -46,7 +46,7 @@ export class HomeComponent implements OnInit {
           this.allvalidcities = resInputData
           this.allvalidcities.forEach(element => {
             console.log(element.cityname)
-            this.mymap.set(element.cityname, new cityCrimeObject(element.centerlat, element.centerlong))
+            this.mymap.set(element.cityname, new cityCrimeObject(element.centerlat, element.centerlong, []))
           });
           
         })
@@ -62,19 +62,33 @@ export class HomeComponent implements OnInit {
     
     if (this.mymap.has(input)) {
       this.validcity = true
-      this._userEntryService.getInputs()
-      .subscribe(resInputData =>  {
-        this.crimelocations = resInputData;
+      if (this.mymap.get(input).crimedata.length == 0) {
+        this._userEntryService.getInputs(this.deleteAfterComma(input))
+        .subscribe(resInputData =>  {
+          this.crimelocations = resInputData;
+          this.mymap.get(input).crimedata = this.crimelocations;
+          this.latitude = Number(this.mymap.get(input).centerlatitude)
+          this.longitude = Number(this.mymap.get(input).centerlongitude)
+          console.log("Not seen yet")
+        })
+      } else {
+        this.crimelocations = this.mymap.get(input).crimedata
         this.latitude = Number(this.mymap.get(input).centerlatitude)
         this.longitude = Number(this.mymap.get(input).centerlongitude)
-      })
+        console.log("Already seen")
+      }
+
+
+
     } else {
       this.validcity = false;
     }
   }
 
-  validCityValidator(control: AbstractControl): {[key: string]: any} | null {
-    return (this.mymap.has(control.value)) ? { 'forbiddenCity' : { value: control.value }} : null;
+  deleteAfterComma(input: String):String {
+    var comma = input.indexOf(',');
+    return input.substring(0, comma)
   }
+  
   
 }
