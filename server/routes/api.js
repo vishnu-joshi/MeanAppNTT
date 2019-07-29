@@ -1,9 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
-const Input = require('../models/userentry')
-const Loca = require('../models/loc')
-const SuppCity = require('../models/SupportedCity')
+const Input = require('../models/userentry');
+const Loca = require('../models/loc');
+const SuppCity = require('../models/SupportedCity');
+const multer = require('multer');
+const upld = multer({dest: './src/assets/uploads'}).single('csv');
 
 //const db = "mongodb://videouser:please123@cluster0-shard-00-00-5ftnw.mongodb.net:27017,cluster0-shard-00-01-5ftnw.mongodb.net:27017,cluster0-shard-00-02-5ftnw.mongodb.net:27017/userinputdata?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true&w=majority";
 const db = "mongodb://ntt-test-user:internproject@cluster0-shard-00-00-5ftnw.mongodb.net:27017,cluster0-shard-00-01-5ftnw.mongodb.net:27017,cluster0-shard-00-02-5ftnw.mongodb.net:27017/Crime?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true&w=majority";
@@ -88,5 +90,19 @@ router.put('/userinput/:id', function(req, res){
         }
     });
 });
+
+router.post('/upload', function(req, res, next) {
+    var path = '';
+    upld(req, res, function(err) {
+        if (err) {
+            console.log(err);
+            return res.status(422).send("Error occurred.");
+        } else {
+            path = req.file.path;
+            return res.send("Upload completed for "+path);
+        }
+    });
+});
+
 
 module.exports = router;
