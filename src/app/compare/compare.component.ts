@@ -36,7 +36,8 @@ export class CompareComponent implements OnInit {
   lat2 = 0
   long1 = 0
   long2 = 0
-  pieChart: Chart
+  pieChart1: Chart
+  pieChart2: Chart
 
 
   constructor(private _userEntryService: UserentryService) { }
@@ -50,42 +51,6 @@ export class CompareComponent implements OnInit {
           this.mymap.set(element.cityname, new cityCrimeObject(element.centerlat, element.centerlong, 0, 0, []))
         });        
       })
-    this.pieChart = new Chart('pieChart1', {
-      type: "pie",
-      data: {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-        datasets: [{
-            label: '# of Votes',
-            data: [12, 19, 3, 5, 2, 3],
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
-            ],
-            borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
-            ],
-            borderWidth: 1
-        }]
-    },
-    options: {
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero: true
-                }
-            }]
-        }
-    }
-    });
   }
 
   checkCity(input: String) {
@@ -203,8 +168,8 @@ export class CompareComponent implements OnInit {
   changeChart() {
     console.log(this.labels2)
     console.log(this.datapie2)
-    this.pieChart.destroy()
-    this.pieChart = new Chart('pieChart1', {
+    
+    this.pieChart1 = new Chart('pieChart1', {
       type: "pie",
       data: {
         labels: this.labels2,
@@ -212,7 +177,7 @@ export class CompareComponent implements OnInit {
             
             label: '# of Votes',
             data: this.datapie2,
-            /*
+            
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
                 'rgba(54, 162, 235, 0.2)',
@@ -229,7 +194,7 @@ export class CompareComponent implements OnInit {
                 'rgba(153, 102, 255, 1)',
                 'rgba(255, 159, 64, 1)'
             ],
-            */
+            
             borderWidth: 1
         }]
     },
