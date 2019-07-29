@@ -1,9 +1,20 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
-const Input = require('../models/userentry')
-const Loca = require('../models/loc')
-const SuppCity = require('../models/SupportedCity')
+const Input = require('../models/userentry');
+const Loca = require('../models/loc');
+const SuppCity = require('../models/SupportedCity');
+const multer = require('multer');
+const path = require('path');
+var storage = multer.diskStorage({
+    destination: function(req, file, cb) {
+        cb(null, './src/assets/uploads');
+    },
+    filename: function(req, file, cb) {
+        cb(null, Date.now()+path.extname(file.originalname));
+    }
+})
+const upld = multer({storage: storage}).single('csv');
 
 //const db = "mongodb://videouser:please123@cluster0-shard-00-00-5ftnw.mongodb.net:27017,cluster0-shard-00-01-5ftnw.mongodb.net:27017,cluster0-shard-00-02-5ftnw.mongodb.net:27017/userinputdata?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true&w=majority";
 const db = "mongodb://ntt-test-user:internproject@cluster0-shard-00-00-5ftnw.mongodb.net:27017,cluster0-shard-00-01-5ftnw.mongodb.net:27017,cluster0-shard-00-02-5ftnw.mongodb.net:27017/Crime?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true&w=majority";
@@ -105,5 +116,19 @@ router.put('/userinput/:id', function(req, res){
         }
     });
 });
+
+router.post('/upload', function(req, res, next) {
+    var fp = '';
+    upld(req, res, function(err) {
+        if (err) {
+            console.log(err);
+            return res.status(422).send("Error occurred.");
+        } else {
+            fp = req.file.path;
+            return res.send("Upload completed for "+fp);
+        }
+    });
+});
+
 
 module.exports = router;
