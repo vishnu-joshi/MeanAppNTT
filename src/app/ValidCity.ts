@@ -1,8 +1,8 @@
 export class ValidCity {
     _id: String;
     cityname: string;
-    centerlat: Number;
-    centerlong: Number;
+    centerlat: number;
+    centerlong: number;
     parklat: number;
     parklong: number;
 }

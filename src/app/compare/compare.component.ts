@@ -55,10 +55,7 @@ export class CompareComponent implements OnInit {
           this.mymap.set(element.cityname, new cityCrimeObject(element.centerlat, element.centerlong, element.parklat, element.parklong, []))
         });        
       })
-    this._userEntryService.getSpecifiedLocation()
-      .subscribe(resInpData => {
-        console.log(resInpData.results[0].locations[0].latLng)
-      })
+
   }
 
   checkCity(input: String) {
@@ -69,10 +66,10 @@ export class CompareComponent implements OnInit {
         .subscribe(resInputData =>  {
           this.crimelocations1 = resInputData;
           this.mymap.get(input).crimedata = this.crimelocations1;
-          this.parklat1 = Number(this.mymap.get(input).parklatitude)
-          this.parklong1 = Number(this.mymap.get(input).parklongitude)
-          this.lat1 = Number(this.mymap.get(input).centerlatitude)
-          this.long1 = Number(this.mymap.get(input).centerlongitude)
+          this.parklat1 = this.mymap.get(input).parklatitude;
+          this.parklong1 = this.mymap.get(input).parklongitude;
+          this.lat1 = this.mymap.get(input).centerlatitude;
+          this.long1 = this.mymap.get(input).centerlongitude;
           this.renderGraph1(this.crimelocations1, this.labels1)
           this.changeChart1(this.labels1, this.datapie1);
           this.distFromParks1(this.mymap.get(input).parklatitude, this.mymap.get(input).parklongitude)

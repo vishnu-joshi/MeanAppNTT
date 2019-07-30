@@ -15,7 +15,7 @@ export class UserentryService {
   private _getUrl = "/api/userinputs";
   private _postUrl = "/api/userinput";
   private _getCityUrl = "/api/supportedcities"
-  private _getLocationCoordinates = "http://www.mapquestapi.com/geocoding/v1/address?key=cDyNPtcGDDzgqAc4mihhJtABeCtYUqlG&location=xyz"
+  private _getLocationCoordinates = "http://www.mapquestapi.com/geocoding/v1/address?key=cDyNPtcGDDzgqAc4mihhJtABeCtYUqlG&location="
   constructor(private _http: Http) { }
 
   getInputs(input: String):Observable<Location[]> {
@@ -28,8 +28,8 @@ export class UserentryService {
         .pipe(map((response: Response) => response.json()));
   }
 
-  getSpecifiedLocation() {
-    return this._http.get(this._getLocationCoordinates)
+  getSpecifiedLocation(location: string) {
+    return this._http.get(this._getLocationCoordinates + location)
     .pipe(map((response: Response) => response.json()));
   }
 

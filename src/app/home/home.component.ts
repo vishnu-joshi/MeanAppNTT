@@ -10,6 +10,7 @@ import { ValidCity } from '../ValidCity';
 import { LoadChildren } from '@angular/router';
 import 'rxjs/add/operator/map'
 import 'rxjs/add/operator/catch'
+import { locationEntry } from './locationEntry';
 
 
 @Component({
@@ -32,6 +33,9 @@ export class HomeComponent implements OnInit {
   public mymap = new Map<string, cityCrimeObject>();
   validcity = true;
   cityattempt = new cityEntry("");
+  locationattempt = new locationEntry("");
+  showbuttons = false;
+  radius = 0;
 
   constructor(private _userEntryService: UserentryService) { }
   
@@ -73,6 +77,14 @@ export class HomeComponent implements OnInit {
   deleteAfterComma(input: String):String {
     var comma = input.indexOf(',');
     return input.substring(0, comma)
+  }
+
+  geocodeLocation(input: string) {
+    this._userEntryService.getSpecifiedLocation(input)
+    .subscribe(resInputData => {
+      
+      console.log(resInputData.results[0].locations[0].latLng)        
+    })
   }
   
   
