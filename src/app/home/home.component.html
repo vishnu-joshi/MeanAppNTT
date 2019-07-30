@@ -39,9 +39,14 @@
 <hr />
 <div class="row justify-content-center">
     <agm-map [latitude] = "latitude" [longitude] = "longitude">
-            <li *ngFor = "let Location of crimelocations"><a>
-                <agm-marker [latitude] = Location.latitude [longitude] = Location.longitude></agm-marker>
+            <li *ngFor = "let Location of displayedLocations"><a>
+                <agm-marker [latitude] = Location.latitude [longitude] = Location.longitude>
+                    <agm-info-window>
+                        Crime: {{Location.typeOfCrime}}
+                    </agm-info-window>
+                </agm-marker>
                 </a></li>
+            <agm-marker [label]="labelOptions" [latitude] = "templatitude" [longitude] = "templongitude"></agm-marker>
     </agm-map>
     <entry-list [crimelocations]="crimelocations"></entry-list>
 </div>
@@ -49,7 +54,7 @@
 <div class="container">
     <div class="row">
         <form #locname="ngForm" (ngSubmit)="geocodeLocation(inputtext1.value)" class="row well">
-            <div class="col-md-4"></div>
+            <div class="col-md-4">Enter a full address (Please include city, state, and zip code)</div>
             <div class="col-md-3">
                 <div class="form-group">
                     <input type="text"
@@ -75,45 +80,51 @@
         </form>
     </div>
     <div class="row" *ngIf="showbuttons">
-        <!-- All Crimes -->
-        <div class="form-check form-check-inline">
-            <input type="radio" class="form-check-input" id="materialInline1" 
-                name="inlineMaterialRadiosExample" (click)="radius=0" checked>
-            <label class="form-check-label" for="materialInline1">1</label>
+        <div class="col-md-2">
+            <h4>Select Radius</h4>
         </div>
+        <div class="col-md-1"></div>
+        <div class="col-md-9">
+            <!-- All Crimes -->
+            <div class="form-check form-check-inline">
+                <input type="radio" class="form-check-input" id="materialInline1" 
+                name="inlineMaterialRadiosExample" (click)="setRadiusAndRenderMap(0)" checked>
+                <label class="form-check-label" for="materialInline1">All Crimes</label>
+            </div>
+  
+            <!-- 0.1 Miles -->
+            <div class="form-check form-check-inline">
+                <input type="radio" class="form-check-input" id="materialInline2" 
+                name="inlineMaterialRadiosExample" (click)="setRadiusAndRenderMap(0.1)">
+                <label class="form-check-label" for="materialInline2">0.1 mi</label>
+            </div>
+  
+            <!-- 0.25 Miles -->
+            <div class="form-check form-check-inline">
+                <input type="radio" class="form-check-input" id="materialInline3" 
+                name="inlineMaterialRadiosExample" (click)="setRadiusAndRenderMap(0.25)">
+                <label class="form-check-label" for="materialInline3">0.25 mi</label>
+            </div>
+            <!-- 0.5 Miles -->
+            <div class="form-check form-check-inline">
+                <input type="radio" class="form-check-input" id="materialInline4" 
+                name="inlineMaterialRadiosExample" (click)="setRadiusAndRenderMap(0.5)">
+                <label class="form-check-label" for="materialInline4">0.5 mi</label>
+            </div>
       
-        <!-- 0.1 Miles -->
-        <div class="form-check form-check-inline">
-            <input type="radio" class="form-check-input" id="materialInline2" 
-            name="inlineMaterialRadiosExample" (click)="radius=0.1">
-            <label class="form-check-label" for="materialInline2">2</label>
-        </div>
+            <!-- 1 Mile -->
+            <div class="form-check form-check-inline">
+                <input type="radio" class="form-check-input" id="materialInline5" 
+                name="inlineMaterialRadiosExample" (click)="setRadiusAndRenderMap(1)">
+                <label class="form-check-label" for="materialInline5">1 mi</label>
+            </div>
       
-        <!-- 0.25 Miles -->
-        <div class="form-check form-check-inline">
-            <input type="radio" class="form-check-input" id="materialInline3" 
-            name="inlineMaterialRadiosExample" (click)="radius=0.25">
-            <label class="form-check-label" for="materialInline3">3</label>
-        </div>
-        <!-- 0.5 Miles -->
-        <div class="form-check form-check-inline">
-            <input type="radio" class="form-check-input" id="materialInline4" 
-            name="inlineMaterialRadiosExample" (click)="radius=0.5">
-            <label class="form-check-label" for="materialInline4">4</label>
-        </div>
-          
-        <!-- 1 Mile -->
-        <div class="form-check form-check-inline">
-            <input type="radio" class="form-check-input" id="materialInline5" 
-            name="inlineMaterialRadiosExample" (click)="radius=1">
-            <label class="form-check-label" for="materialInline5">5</label>
-        </div>
-          
-        <!-- 2 Miles -->
-        <div class="form-check form-check-inline">
-            <input type="radio" class="form-check-input" id="materialInline6" 
-            name="inlineMaterialRadiosExample" (click)="radius=2">
-            <label class="form-check-label" for="materialInline6">6</label>
+            <!-- 2 Miles -->
+            <div class="form-check form-check-inline">
+                <input type="radio" class="form-check-input" id="materialInline6" 
+                name="inlineMaterialRadiosExample" (click)="setRadiusAndRenderMap(2)">
+                <label class="form-check-label" for="materialInline6">2 mi</label>
+            </div>
         </div>
     </div>
 </div>

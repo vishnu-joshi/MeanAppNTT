@@ -26,6 +26,7 @@ export class HomeComponent implements OnInit {
 
   usinputs: Array<UserEntry>;
   crimelocations: Array<Location>;
+  displayedLocations: Array<Location>;
   tempcrimes: Array<Location>;
   public allvalidcities: Array<ValidCity>;
   public latitude = 38.9339;
@@ -36,6 +37,16 @@ export class HomeComponent implements OnInit {
   locationattempt = new locationEntry("");
   showbuttons = false;
   radius = 0;
+  templatitude: number;
+  templongitude: number;
+
+  labelOptions = {
+    color: '#00FFFF',
+    fontFamily: '',
+    fontSize: '24px',
+    fontWeight: 'bold',
+    text: 'O',
+    }
 
   constructor(private _userEntryService: UserentryService) { }
   
@@ -51,20 +62,21 @@ export class HomeComponent implements OnInit {
   };
 
   logMessage(input: string) {
-    
     if (this.mymap.has(input)) {
       this.validcity = true
       if (this.mymap.get(input).crimedata.length == 0) {
         this._userEntryService.getInputs(this.deleteAfterComma(input))
         .subscribe(resInputData =>  {
           this.crimelocations = resInputData;
+          this.displayedLocations = this.crimelocations;
           this.mymap.get(input).crimedata = this.crimelocations;
           this.latitude = Number(this.mymap.get(input).centerlatitude)
           this.longitude = Number(this.mymap.get(input).centerlongitude)
-          console.log("Not seen yet")
+          console.log(this.crimelocations)
         })
       } else {
         this.crimelocations = this.mymap.get(input).crimedata
+        this.displayedLocations = this.crimelocations;
         this.latitude = Number(this.mymap.get(input).centerlatitude)
         this.longitude = Number(this.mymap.get(input).centerlongitude)
         console.log("Already seen")
@@ -82,10 +94,31 @@ export class HomeComponent implements OnInit {
   geocodeLocation(input: string) {
     this._userEntryService.getSpecifiedLocation(input)
     .subscribe(resInputData => {
-      
-      console.log(resInputData.results[0].locations[0].latLng)        
+      this.templatitude = resInputData.results[0].locations[0].latLng.lat;
+      this.templongitude = resInputData.results[0].locations[0].latLng.lng;
     })
   }
-  
-  
+
+  setRadiusAndRenderMap(input: number) {
+    this.displayedLocations = []
+    this.radius = input;
+    var mile_dist: number;
+    if (this.radius === 0) {
+      this.displayedLocations = this.crimelocations;
+    }
+    else {
+      this.crimelocations.forEach(element => {
+      mile_dist = Math.sqrt(Math.pow(element.latitude - this.templatitude, 2) + Math.pow(element.longitude - this.templongitude, 2)) * 69
+      if (mile_dist <= this.radius) {
+        this.displayedLocations.push(element)
+      }
+      })
+    }
+    
+        
+
+  }
 }
+  
+  
+
