@@ -55,6 +55,10 @@ export class CompareComponent implements OnInit {
           this.mymap.set(element.cityname, new cityCrimeObject(element.centerlat, element.centerlong, element.parklat, element.parklong, []))
         });        
       })
+    this._userEntryService.getSpecifiedLocation()
+      .subscribe(resInpData => {
+        console.log(resInpData.results[0].locations[0].latLng)
+      })
   }
 
   checkCity(input: String) {

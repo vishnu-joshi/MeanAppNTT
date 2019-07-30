@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { UserentryService } from './../userentry.service'
+import { ValidCity } from '../ValidCity'
+import { cityCrimeObject } from '../home/CityCrimeObject';
 
 @Component({
   selector: 'app-citylist',
@@ -7,9 +10,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CitylistComponent implements OnInit {
 
-  constructor() { }
+  constructor(private _userEntryService: UserentryService) { }
 
+  
+  
+  
+  allvalidcities: Array<ValidCity>;
+  
+  
+  
   ngOnInit() {
+    this._userEntryService.getCities()
+    .subscribe(resInputData => {
+      this.allvalidcities = resInputData      
+    })
   }
 
 }

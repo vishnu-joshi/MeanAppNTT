@@ -1,5 +1,3 @@
-<div class="container">
-    <div class="row">
-        citylist works!
-    </div>
-</div>
+<ul class="nav nav-pills flex-column">
+    <li *ngFor="let ValidCity of allvalidcities"><a>{{ValidCity.cityname}}</a></li>
+</ul>
