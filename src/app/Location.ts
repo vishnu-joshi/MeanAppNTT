@@ -9,8 +9,8 @@ export class Location {
     address_1: String;
     city: String;
     state: String;
-    latitude: String;
-    longitude: String;
+    latitude: number;
+    longitude: number;
     typeOfCrime: String;
     created_at: String;
     updated_at: String;

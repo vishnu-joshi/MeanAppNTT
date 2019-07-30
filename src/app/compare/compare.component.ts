@@ -38,6 +38,10 @@ export class CompareComponent implements OnInit {
   long2 = 0
   pieChart1: Chart
   pieChart2: Chart
+  barChart1: Chart
+  barChart2: Chart
+  distfromparks1: [0, 0, 0, 0, 0, 0]
+  distfromparks2: [0, 0, 0, 0, 0, 0]
 
 
   constructor(private _userEntryService: UserentryService) { }
@@ -48,7 +52,7 @@ export class CompareComponent implements OnInit {
         this.validcities = resInputData
         this.validcities.forEach(element => {
           console.log(element.cityname)
-          this.mymap.set(element.cityname, new cityCrimeObject(element.centerlat, element.centerlong, 0, 0, []))
+          this.mymap.set(element.cityname, new cityCrimeObject(element.centerlat, element.centerlong, element.parklat, element.parklong, []))
         });        
       })
   }
@@ -65,10 +69,10 @@ export class CompareComponent implements OnInit {
           this.parklong1 = Number(this.mymap.get(input).parklongitude)
           this.lat1 = Number(this.mymap.get(input).centerlatitude)
           this.long1 = Number(this.mymap.get(input).centerlongitude)
-          console.log("Not seen yet")
           this.renderGraph1(this.crimelocations1, this.labels1)
           this.changeChart1(this.labels1, this.datapie1);
           this.distFromParks1(this.mymap.get(input).parklatitude, this.mymap.get(input).parklongitude)
+          this.changeBar1()
         })
       } else {
         this.crimelocations1 = this.mymap.get(input).crimedata
@@ -76,9 +80,10 @@ export class CompareComponent implements OnInit {
         this.parklong1 = Number(this.mymap.get(input).parklongitude)
         this.lat1 = Number(this.mymap.get(input).centerlatitude)
         this.long1 = Number(this.mymap.get(input).centerlongitude)
-        console.log("Already seen")
         this.renderGraph1(this.crimelocations1, this.labels1)
         this.changeChart1(this.labels1, this.datapie1);
+        this.distFromParks1(this.mymap.get(input).parklatitude, this.mymap.get(input).parklongitude)
+        this.changeBar1()
       }
       
     } else {
@@ -98,9 +103,10 @@ export class CompareComponent implements OnInit {
           this.parklong2 = Number(this.mymap.get(input).parklongitude)
           this.lat2 = Number(this.mymap.get(input).centerlatitude)
           this.long2 = Number(this.mymap.get(input).centerlongitude)
-          console.log("Not seen yet")
           this.renderGraph2(this.crimelocations2, this.labels2);
           this.changeChart2(this.labels2, this.datapie2);
+          this.distFromParks2(this.mymap.get(input).parklatitude, this.mymap.get(input).parklongitude)
+          this.changeBar2()
         })
       } else {
         this.crimelocations2 = this.mymap.get(input).crimedata
@@ -108,9 +114,10 @@ export class CompareComponent implements OnInit {
         this.parklong2 = Number(this.mymap.get(input).parklongitude)
         this.lat2 = Number(this.mymap.get(input).centerlatitude)
         this.long2 = Number(this.mymap.get(input).centerlongitude)
-        console.log("Already seen")
         this.renderGraph2(this.crimelocations2, this.labels2);
         this.changeChart2(this.labels2, this.datapie2);
+        this.distFromParks2(this.mymap.get(input).parklatitude, this.mymap.get(input).parklongitude)
+        this.changeBar2()
       }
       
     } else {
@@ -221,7 +228,7 @@ export class CompareComponent implements OnInit {
         labels: labels,
         datasets: [{
             
-            label: '# of Votes',
+            label: 'Crime Type Breakdown',
             data: datapie,
             
             backgroundColor: [
@@ -263,7 +270,7 @@ export class CompareComponent implements OnInit {
         labels: labels,
         datasets: [{
             
-            label: '# of Votes',
+            label: 'Crime Type Breakdown',
             data: datapie,
             
             backgroundColor: [
@@ -298,8 +305,130 @@ export class CompareComponent implements OnInit {
     });
   }
 
-  distFromParks1(lat: number, long: number) {
+  changeBar1() {
+    this.barChart1 = new Chart('barChart1', {
+      type: "bar",
+      data: {
+        labels: ["<0.1", "<0.25", "<0.5", "<1", "<2", ">2.1"],
+        datasets: [{
+            
+            label: 'Crimes within Radius of Largest Park',
+            data: this.distfromparks1,
+            
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+    });
+  }
 
+  changeBar2() {
+    this.barChart2 = new Chart('barChart2', {
+      type: "bar",
+      data: {
+        labels: ["<0.1", "<0.25", "<0.5", "<1", "<2", ">2.1"],
+        datasets: [{
+            
+            label: 'Crimes within Radius of Largest Park',
+            data: this.distfromparks2,
+            
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+    });
+  }
+
+  distFromParks1(lat: number, long: number) {
+    this.distfromparks1 = [0, 0, 0, 0, 0, 0]
+    var miledist: number
+    this.crimelocations1.forEach(element => {
+      miledist = Math.sqrt(Math.pow(element.latitude - lat, 2) + Math.pow(element.longitude - long, 2)) * 69
+      if (miledist < 0.1) {
+        this.distfromparks1[0]++
+      } else if (miledist < 0.25) {
+        this.distfromparks1[1]++
+      } else if (miledist < 0.5) {
+        this.distfromparks1[2]++
+      } else if (miledist < 1) {
+        this.distfromparks1[3]++
+      } else if (miledist < 2) {
+        this.distfromparks1[4]++
+      } else {
+        this.distfromparks1[5]++
+      }
+    });
+  }
+
+  distFromParks2(lat: number, long: number) {
+    this.distfromparks2 = [0, 0, 0, 0, 0, 0]
+    var miledist: number
+    this.crimelocations2.forEach(element => {
+      miledist = Math.sqrt(Math.pow(element.latitude - lat, 2) + Math.pow(element.longitude - long, 2)) * 69
+      if (miledist < 0.1) {
+        this.distfromparks2[0]++
+      } else if (miledist < 0.25) {
+        this.distfromparks2[1]++
+      } else if (miledist < 0.5) {
+        this.distfromparks2[2]++
+      } else if (miledist < 1) {
+        this.distfromparks2[3]++
+      } else if (miledist < 2) {
+        this.distfromparks2[4]++
+      } else {
+        this.distfromparks2[5]++
+      }
+    });
   }
 }
 

@@ -3,6 +3,6 @@ export class ValidCity {
     cityname: string;
     centerlat: Number;
     centerlong: Number;
-    parklat: Number;
-    parklong: Number;
+    parklat: number;
+    parklong: number;
 }
