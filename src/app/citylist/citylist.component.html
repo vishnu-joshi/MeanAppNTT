@@ -1,3 +1,5 @@
+<h1 align="center">SMART City Supported Cities</h1>
+<h4 align="center">Click any city to be redirected to its open crime data source.</h4>
 <ul class="nav nav-pills flex-column">
-    <li *ngFor="let ValidCity of allvalidcities"><a>{{ValidCity.cityname}}</a></li>
+    <li *ngFor="let ValidCity of allvalidcities"><a href = "{{ValidCity.linktodata}}">{{ValidCity.cityname}}</a></li>
 </ul>

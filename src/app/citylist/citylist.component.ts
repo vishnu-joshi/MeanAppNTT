@@ -22,7 +22,8 @@ export class CitylistComponent implements OnInit {
   ngOnInit() {
     this._userEntryService.getCities()
     .subscribe(resInputData => {
-      this.allvalidcities = resInputData      
+      this.allvalidcities = resInputData
+      console.log(this.allvalidcities)      
     })
   }
 

@@ -5,4 +5,5 @@ export class ValidCity {
     centerlong: number;
     parklat: number;
     parklong: number;
+    linktodata: string;
 }
