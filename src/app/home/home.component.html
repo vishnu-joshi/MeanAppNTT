@@ -42,7 +42,8 @@
             <li *ngFor = "let Location of displayedLocations"><a>
                 <agm-marker [latitude] = Location.latitude [longitude] = Location.longitude>
                     <agm-info-window>
-                        Crime: {{Location.typeOfCrime}}
+                        <b>Crime:</b> {{Location.typeOfCrime}}
+                        <b>Date:</b> {{convertDate(Location.date)}}
                     </agm-info-window>
                 </agm-marker>
                 </a></li>

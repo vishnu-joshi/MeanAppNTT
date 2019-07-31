@@ -11,7 +11,7 @@ export class Location {
     state: String;
     latitude: number;
     longitude: number;
-    typeOfCrime: String;
+    typeOfCrime: String; // included
     created_at: String;
     updated_at: String;
     location: Object;
