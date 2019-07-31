@@ -52,13 +52,19 @@
     <entry-list [crimelocations]="crimelocations"></entry-list>
 </div>
 <hr />
+
 <div class="container">
+        
     <div class="row">
+        <div class = "col-md-3"></div>
+        <div class = "col-md-6">
         <form #locname="ngForm" (ngSubmit)="geocodeLocation(inputtext1.value)" class="row well">
-            <div class="col-md-4">Enter a full address (Please include city, state, and zip code)</div>
-            <div class="col-md-3">
-                <div class="form-group">
-                    <input type="text"
+            <div class="form-group">
+                <h5 align="center">Enter a location to visualize crime in a select radius.</h5>
+                <div class = "row">
+                    <div class = "col-sm-3"></div>
+                    <div class = "col-sm-6">
+                        <input type="text"
                         [class.is-invalid]="(inputtext1.invalid && inputtext1.touched)"
                         id="inputtext1"
                         class="form-control"
@@ -66,25 +72,28 @@
                         #inputtext1="ngModel"
                         required
                         [(ngModel)]="locationattempt.locationnameentry">
-                    <div *ngIf="(inputtext1.invalid && inputtext1.touched)">
-                        <small class = "text-danger" *ngIf="inputtext1.invalid && inputtext1.touched">Must enter an address</small>
+                        <div *ngIf="(inputtext1.invalid && inputtext1.touched)">
+                            <small class = "text-danger" *ngIf="inputtext1.invalid && inputtext1.touched">Must enter an address</small>
+                        </div>
                     </div>
+                    <div class = "col-sm-3">
+                        <button type="submit"
+                        class="btn btn-success"
+                        [disabled]="inputtext1.invalid"
+                        (click)="showbuttons=true">Find</button>
+                    </div>
+
                 </div>
             </div>
-            <div class="col-md-3">
-                <button type="submit"
-                class="btn btn-success"
-                [disabled]="inputtext1.invalid"
-                (click)="showbuttons=true">Find</button>
-            </div>
-            <div class="col-md-2"></div>
         </form>
+        <div class = "col-md-3"></div>
+    </div>
     </div>
     <div class="row" *ngIf="showbuttons">
-        <div class="col-md-2">
-            <h4>Select Radius</h4>
+        <div class="col-md-1">
+            
         </div>
-        <div class="col-md-1"></div>
+        <div class="col-md-2"></div>
         <div class="col-md-9">
             <!-- All Crimes -->
             <div class="form-check form-check-inline">
