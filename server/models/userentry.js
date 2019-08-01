@@ -6,4 +6,4 @@ const userInput = new Schema({
     input: String
 });
 
-module.exports = mongoose.model('userentry', userInput, 'userinputs');
+module.exports = mongoose.model('userentry', userInput, 'UserRequests');

@@ -13,7 +13,7 @@ import { ValidCity } from './ValidCity'
 export class UserentryService {
 
   private _getUrl = "/api/userinputs";
-  private _postUrl = "/api/userinput";
+  private _postUrl = "/api/newcityreq";
   private _getCityUrl = "/api/supportedcities"
   private _getLocationCoordinates = "http://www.mapquestapi.com/geocoding/v1/address?key=cDyNPtcGDDzgqAc4mihhJtABeCtYUqlG&location="
   constructor(private _http: Http) { }

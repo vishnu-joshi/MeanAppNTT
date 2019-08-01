@@ -1,1 +1,17 @@
-<p>newcityreq works!</p>
+<div class="container">
+    <div class="row">
+        <button type="button" class="btn btn-success"
+        (click)="newClicked=true">+ New City Request</button>
+        <button type="button" class="btn btn-danger"
+        (click)="newClicked=false">Cancel Request</button>
+    </div>
+    <div class="row" *ngIf="newClicked">
+        <form #form="ngForm" class="well" (ngSubmit)="submitReq(form.value)">
+            <div class="form-group">
+                <label>Tell Us What City You Want to See Supported (Include State)</label>
+                <input type="text" class="form-control" required name="input" ngModel>
+            </div>
+            <button type="submit" class="btn btn-success">Submit</button>
+        </form>
+    </div>
+</div>
