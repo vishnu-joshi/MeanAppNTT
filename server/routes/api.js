@@ -143,5 +143,18 @@ router.post('/newcityreq', function(req, res) {
     });
 });
 
+router.post('/newfeaturereq', function(req, res) {
+    console.log('Post a request for a new city.');
+    var newReq = new Input();
+    newReq.input = req.body.input;
+    newReq.save(function(err, insertedReq) {
+        if (err) {
+            console.log('Error sending request.');
+        } else {
+            res.json(insertedReq);
+        }
+    });
+});
+
 
 module.exports = router;

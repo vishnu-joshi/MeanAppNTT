@@ -1,1 +1,17 @@
-<p>newfeaturereq works!</p>
+<div class="container">
+    <div class="row">
+        <button type="button" class="btn btn-success"
+        (click)="newClicked=true">+ New Feature Request</button>
+        <button type="button" class="btn btn-danger"
+        (click)="newClicked=false">Cancel Request</button>
+    </div>
+    <div class="row" *ngIf="newClicked">
+        <form #form="ngForm" class="well" (ngSubmit)="submitReq(form.value)">
+            <div class="form-group">
+                <label>Tell Us What Feature You Want to See Supported</label>
+                <textarea type="text" class="form-control" rows="3" required name="input" ngModel></textarea>
+            </div>
+            <button type="submit" class="btn btn-success">Submit</button>
+        </form>
+    </div>
+</div>

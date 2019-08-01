@@ -13,7 +13,8 @@ import { ValidCity } from './ValidCity'
 export class UserentryService {
 
   private _getUrl = "/api/userinputs";
-  private _postUrl = "/api/newcityreq";
+  private _newCityUrl = "/api/newcityreq";
+  private _newFeatureUrl = "/api/newfeaturereq"
   private _getCityUrl = "/api/supportedcities"
   private _getLocationCoordinates = "http://www.mapquestapi.com/geocoding/v1/address?key=cDyNPtcGDDzgqAc4mihhJtABeCtYUqlG&location="
   constructor(private _http: Http) { }
@@ -33,10 +34,17 @@ export class UserentryService {
     .pipe(map((response: Response) => response.json()));
   }
 
-  addInput(input: UserEntry) {
+  addCityInput(input: UserEntry) {
     let headers = new Headers({ 'Content-Type': 'application/json'});
     let options = new RequestOptions({headers: headers});
-    return this._http.post(this._postUrl, JSON.stringify(input), options)
+    return this._http.post(this._newCityUrl, JSON.stringify(input), options)
       .pipe(map((response: Response) => response.json())); 
-    }
+  }
+  addFeatureInput(input: UserEntry) {
+    let headers = new Headers({ 'Content-Type': 'application/json'});
+    let options = new RequestOptions({headers: headers});
+    return this._http.post(this._newFeatureUrl, JSON.stringify(input), options)
+      .pipe(map((response: Response) => response.json())); 
+  }
+
 }

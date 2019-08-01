@@ -19,7 +19,7 @@ export class NewcityreqComponent implements OnInit {
   }
 
   submitReq(input: UserEntry) {
-    this._userEntryService.addInput(input)
+    this._userEntryService.addCityInput(input)
     .subscribe(resNewReq => {
       this.selectedInput = resNewReq;
     });
